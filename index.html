@@ -1,13 +1,485 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id" data-tema="light" data-bs-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tugasin - Pengelola Tugas Mahasiswa</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <h>terubah</h>
-    <p>ubah 2</p>
-    <p>ubah 3</p>
+
+  <!-- HALAMAN LOGIN DAN DAFTAR -->
+
+  <div id="layar-auth" class="layar-auth">
+
+    <aside class="panel-sapa">
+      <a class="brand" href="#">Tugas<span>in.</span></a>
+
+      <div>
+        <h1 data-i18n-html="authHero">Semua tugas kuliah,<br>lebih teratur.</h1>
+
+        <p data-i18n="authDesc">
+          Catat deadline, atur prioritas, dan selesaikan tugas
+          satu per satu tanpa perlu bingung.
+        </p>
+
+        <div class="sapa-mini">
+          <strong data-i18n="stayProd">Tetap produktif!</strong>
+          <p class="mb-0 mt-2" data-i18n="stayProdDesc">
+            Satu tempat untuk semua tugas yang perlu kamu kerjakan.
+          </p>
+        </div>
+      </div>
+
+      <small data-i18n="authFoot">Tugasin - Website pengelola tugas mahasiswa</small>
+    </aside>
+
+    <main class="form-auth">
+
+      <!-- FORM LOGIN -->
+
+      <section id="panel-login" class="kartu">
+        <h2 class="fw-bold mb-2" data-i18n="welcome">Selamat datang!</h2>
+        <p class="text-secondary mb-4" data-i18n="loginDesc">
+          Masuk untuk melihat daftar tugasmu.
+        </p>
+
+        <div id="pesan-login" class="pesan d-none"></div>
+
+        <form id="form-login">
+          <label class="form-label fw-semibold" data-i18n="email">Email</label>
+          <input
+            class="form-control mb-3"
+            id="email-login"
+            type="email"
+            placeholder="nama@email.com"
+            required
+          >
+
+          <label class="form-label fw-semibold" data-i18n="password">Kata sandi</label>
+          <input
+            class="form-control mb-4"
+            id="password-login"
+            type="password"
+            data-i18n-ph="passPh"
+            placeholder="Masukkan kata sandi"
+            required
+          >
+
+          <button class="btn btn-hijau w-100 py-3" type="submit" data-i18n="login">
+            Masuk
+          </button>
+        </form>
+
+        <div class="text-center mt-3">
+          <span data-i18n="noAcc">Belum punya akun?</span>
+          <a href="#daftar" data-i18n="regHere">Daftar di sini</a>
+        </div>
+
+        <hr>
+
+        <button id="tombol-demo" class="btn btn-outline-success w-100" data-i18n="demoBtn">
+          Masuk akun demo
+        </button>
+
+        <p class="teks-kecil mt-3 mb-0" data-i18n="demoNote">
+          Mode demo frontend. Akun hanya disimpan pada browser ini.
+          Jangan gunakan kata sandi asli.
+        </p>
+      </section>
+
+      <!-- FORM PENDAFTARAN -->
+
+      <section id="panel-daftar" class="kartu d-none">
+        <h2 class="fw-bold mb-2" data-i18n="createAcc">Buat akun</h2>
+        <p class="text-secondary mb-4" data-i18n="regDesc">
+          Mulai kelola tugas kuliahmu.
+        </p>
+
+        <div id="pesan-daftar" class="pesan d-none"></div>
+
+        <form id="form-daftar">
+          <label class="form-label fw-semibold" data-i18n="fullName">Nama lengkap</label>
+          <input
+            class="form-control mb-3"
+            id="nama-daftar"
+            required
+            minlength="2"
+            data-i18n-ph="namePh"
+            placeholder="Nama kamu"
+          >
+
+          <label class="form-label fw-semibold" data-i18n="email">Email</label>
+          <input
+            class="form-control mb-3"
+            id="email-daftar"
+            type="email"
+            required
+            placeholder="nama@email.com"
+          >
+
+          <label class="form-label fw-semibold" data-i18n="passMin">
+            Kata sandi (minimal 6 karakter)
+          </label>
+          <input
+            class="form-control mb-4"
+            id="password-daftar"
+            type="password"
+            required
+            minlength="6"
+          >
+
+          <button class="btn btn-hijau w-100 py-3" type="submit" data-i18n="regBtn">
+            Daftar akun
+          </button>
+        </form>
+
+        <div class="text-center mt-3">
+          <span data-i18n="haveAcc">Sudah punya akun?</span>
+          <a href="#login" data-i18n="loginHere">Masuk di sini</a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- HALAMAN UTAMA SETELAH LOGIN -->
+
+  <div id="layar-app" class="app d-none">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+      <a class="brand px-2" href="#beranda">
+        Tugas<span>in.</span>
+      </a>
+
+      <nav class="nav">
+        <button class="nav-link-custom aktif" data-halaman="beranda" data-i18n="navHome">
+          Beranda
+        </button>
+
+        <button class="nav-link-custom" data-halaman="tugas" data-i18n="navTasks">
+          Daftar tugas
+        </button>
+
+        <button class="nav-link-custom" data-halaman="kalender" data-i18n="navCal">
+          Kalender
+        </button>
+
+        <button class="nav-link-custom" data-halaman="tambah" data-i18n="navAdd">
+          + Tambah tugas
+        </button>
+
+        <button class="nav-link-custom" data-halaman="pengaturan" data-i18n="navSet">
+          Pengaturan
+        </button>
+      </nav>
+
+      <div class="profil">
+        <button type="button" class="profil-info" data-halaman="pengaturan">
+          <div class="fw-bold" id="nama-profil">Pengguna</div>
+          <small class="text-secondary" id="email-profil"></small>
+        </button>
+
+        <button class="btn btn-sm btn-outline-danger mt-2" id="tombol-keluar" data-i18n="logout">
+          Keluar
+        </button>
+      </div>
+    </aside>
+
+    <main class="konten">
+
+      <header class="topbar">
+        <div>
+          <h1 id="judul-halaman">Beranda</h1>
+          <p id="subjudul-halaman">Ayo selesaikan tugasmu hari ini.</p>
+        </div>
+
+        <button class="btn btn-hijau px-4 py-2" id="aksi-tambah" data-i18n="navAdd">
+          + Tambah tugas
+        </button>
+      </header>
+
+      <!-- DASHBOARD -->
+
+      <section id="halaman-beranda">
+
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-xl-3">
+            <div class="kartu kartu-stat">
+              <div class="label-angka" data-i18n="statTotal">Total tugas</div>
+              <div class="angka" id="stat-total">0</div>
+            </div>
+          </div>
+
+          <div class="col-6 col-xl-3">
+            <div class="kartu kartu-stat">
+              <div class="label-angka" data-i18n="statActive">Belum selesai</div>
+              <div class="angka" id="stat-aktif">0</div>
+            </div>
+          </div>
+
+          <div class="col-6 col-xl-3">
+            <div class="kartu kartu-stat">
+              <div class="label-angka" data-i18n="statDone">Selesai</div>
+              <div class="angka" id="stat-selesai">0</div>
+            </div>
+          </div>
+
+          <div class="col-6 col-xl-3">
+            <div class="kartu kartu-stat">
+              <div class="label-angka" data-i18n="statLate">Terlambat</div>
+              <div class="angka" id="stat-terlambat">0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kartu p-4 mb-4">
+          <div class="d-flex justify-content-between mb-2">
+            <strong data-i18n="progress">Progres penyelesaian</strong>
+            <span id="persentase">0%</span>
+          </div>
+
+          <div class="progress">
+            <div class="progress-bar" id="progres-bar" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="judul-bagian mb-0" data-i18n="nearest">Tugas terdekat</h2>
+          <button class="btn btn-sm btn-outline-success" data-halaman="tugas" data-i18n="seeAll">
+            Lihat semua
+          </button>
+        </div>
+
+        <div class="list-tugas" id="daftar-beranda"></div>
+      </section>
+
+      <!-- DAFTAR SEMUA TUGAS -->
+
+      <section id="halaman-tugas" class="d-none">
+
+        <div class="kartu p-3 mb-3">
+          <div class="row g-2">
+            <div class="col-md-8">
+              <input
+                id="cari-tugas"
+                type="search"
+                class="form-control"
+                data-i18n-ph="searchPh"
+                placeholder="Cari judul atau mata kuliah..."
+              >
+            </div>
+
+            <div class="col-md-4">
+              <select id="filter-tugas" class="form-select">
+                <option value="semua" data-i18n="fAll">Semua tugas</option>
+                <option value="aktif" data-i18n="statActive">Belum selesai</option>
+                <option value="selesai" data-i18n="statDone">Selesai</option>
+                <option value="terlambat" data-i18n="statLate">Terlambat</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div id="daftar-semua" class="list-tugas"></div>
+      </section>
+
+      <!-- KALENDER -->
+
+      <section id="halaman-kalender" class="d-none">
+
+        <div class="kartu p-3 p-md-4 mb-4">
+          <div class="kal-bar">
+            <h2 id="kal-judul"></h2>
+
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-sm btn-outline-success" id="kal-prev" aria-label="Previous">&lsaquo;</button>
+              <button type="button" class="btn btn-sm btn-outline-success" id="kal-hariini" data-i18n="calToday">Hari ini</button>
+              <button type="button" class="btn btn-sm btn-outline-success" id="kal-next" aria-label="Next">&rsaquo;</button>
+            </div>
+          </div>
+
+          <div class="kal-grid" id="kal-grid"></div>
+
+          <div class="kal-legenda">
+            <span><i class="titik titik-aktif"></i><span data-i18n="statActive">Belum selesai</span></span>
+            <span><i class="titik titik-selesai"></i><span data-i18n="statDone">Selesai</span></span>
+            <span><i class="titik titik-terlambat"></i><span data-i18n="statLate">Terlambat</span></span>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+          <h2 class="judul-bagian mb-0" id="kal-judul-hari"></h2>
+          <button type="button" class="btn btn-sm btn-hijau px-3" id="kal-tambah" data-i18n="calAddHere">
+            + Tambah di tanggal ini
+          </button>
+        </div>
+
+        <div class="list-tugas" id="daftar-kalender"></div>
+      </section>
+
+      <!-- TAMBAH DAN EDIT TUGAS -->
+
+      <section id="halaman-tambah" class="d-none">
+
+        <div class="kartu p-4" style="max-width:750px">
+
+          <form id="form-tugas">
+            <input type="hidden" id="id-tugas">
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold" data-i18n="formTitle">Judul tugas</label>
+              <input
+                id="judul-tugas"
+                class="form-control"
+                required
+                data-i18n-ph="titlePh"
+                placeholder="Contoh: Laporan Praktikum Pemrograman"
+              >
+            </div>
+
+            <div class="row g-3 mb-3">
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" data-i18n="course">Mata kuliah</label>
+                <input
+                  id="matkul-tugas"
+                  class="form-control"
+                  required
+                  data-i18n-ph="coursePh"
+                  placeholder="Contoh: Dasar Pemrograman"
+                >
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" data-i18n="due">Tenggat waktu</label>
+                <input
+                  id="deadline-tugas"
+                  type="date"
+                  class="form-control"
+                  required
+                >
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" data-i18n="priority">Prioritas</label>
+                <select id="prioritas-tugas" class="form-select">
+                  <option value="Sedang" data-i18n="pMed">Sedang</option>
+                  <option value="Tinggi" data-i18n="pHigh">Tinggi</option>
+                  <option value="Rendah" data-i18n="pLow">Rendah</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" data-i18n="status">Status</label>
+                <select id="status-tugas" class="form-select">
+                  <option value="aktif" data-i18n="statActive">Belum selesai</option>
+                  <option value="selesai" data-i18n="statDone">Selesai</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold" data-i18n="notes">Catatan</label>
+              <textarea
+                id="catatan-tugas"
+                class="form-control"
+                rows="4"
+                data-i18n-ph="notesPh"
+                placeholder="Catatan tentang tugas ini..."
+              ></textarea>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+              <button type="submit" class="btn btn-hijau px-4" data-i18n="save">
+                Simpan tugas
+              </button>
+
+              <button type="button" class="btn btn-outline-secondary" data-halaman="tugas" data-i18n="cancel">
+                Batal
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </section>
+
+      <!-- PENGATURAN -->
+
+      <section id="halaman-pengaturan" class="d-none">
+
+        <!-- Tema -->
+        <div class="kartu kartu-set">
+          <h2 data-i18n="setTheme">Tema</h2>
+          <p class="teks-kecil" data-i18n="themeDesc">Berlaku untuk seluruh halaman web.</p>
+
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-success" data-pilih-tema="light" data-i18n="themeLight">Terang</button>
+            <button type="button" class="btn btn-outline-success" data-pilih-tema="dark" data-i18n="themeDark">Gelap</button>
+          </div>
+        </div>
+
+        <!-- Bahasa -->
+        <div class="kartu kartu-set">
+          <h2 data-i18n="setLang">Bahasa</h2>
+          <p class="teks-kecil" data-i18n="langDesc">Pilih bahasa tampilan.</p>
+
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-success" data-pilih-bahasa="id">Bahasa Indonesia</button>
+            <button type="button" class="btn btn-outline-success" data-pilih-bahasa="en">English</button>
+          </div>
+        </div>
+
+        <!-- Profil -->
+        <div class="kartu kartu-set">
+          <h2 data-i18n="setProfile">Profil</h2>
+          <p class="teks-kecil" data-i18n="profileDesc">Ubah nama, ganti akun, atau keluar.</p>
+
+          <div id="pesan-nama" class="pesan d-none"></div>
+
+          <form id="form-nama" class="mb-3">
+            <label class="form-label fw-semibold" data-i18n="changeName">Ubah nama</label>
+            <div class="d-flex flex-wrap gap-2">
+              <input
+                id="nama-ubah"
+                class="form-control"
+                style="flex:1 1 220px"
+                required
+                minlength="2"
+                maxlength="60"
+              >
+              <button type="submit" class="btn btn-hijau px-4" data-i18n="saveName">Simpan nama</button>
+            </div>
+          </form>
+
+          <div class="mb-3">
+            <div class="label-angka mb-1" data-i18n="email">Email</div>
+            <div class="fw-semibold" id="email-set"></div>
+          </div>
+
+          <hr>
+
+          <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="btn btn-outline-success" id="tombol-ganti" data-i18n="switchAcc">Ganti akun</button>
+            <button type="button" class="btn btn-outline-danger" id="tombol-keluar2" data-i18n="logout">Keluar</button>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- JAVASCRIPT -->
+
+  <script src="js/script.js" defer></script>
+
 </body>
 </html>
