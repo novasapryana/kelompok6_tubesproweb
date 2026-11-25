@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $hariIni = date("Y-m-d");
 
-// ambil kata kunci pencarian dan filter dari URL (form method GET)
+
 $cari = "";
 if (isset($_GET['cari'])) {
   $cari = trim($_GET['cari']);
@@ -32,7 +32,7 @@ if ($filter == "aktif") {
   $sql = $sql . " AND status != 'selesai' AND deadline < '$hariIni'";
 }
 
-// yang belum selesai di atas, lalu urut deadline
+
 $sql = $sql . " ORDER BY (status = 'selesai') ASC, deadline ASC";
 
 $hasil = mysqli_query($koneksi, $sql);
@@ -111,8 +111,7 @@ $hasil = mysqli_query($koneksi, $sql);
       }
 
       while ($t = mysqli_fetch_assoc($hasil)) {
-        // satu baris tugas, dipakai di index.php, tugas.php, dan kalender.php
-// variabel $t harus sudah berisi 1 baris data tugas dari database
+   
 
 $kelasBaris = "";
 $label = $t['prioritas'];

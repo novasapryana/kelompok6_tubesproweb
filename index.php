@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $hariIni = date("Y-m-d");
 
-// hitung statistik dari semua tugas milik user
+
 $total = 0;
 $selesai = 0;
 $terlambat = 0;
@@ -31,7 +31,7 @@ if ($total > 0) {
   $persen = round($selesai / $total * 100);
 }
 
-// 4 tugas terdekat yang belum selesai
+
 $terdekat = mysqli_query($koneksi, "SELECT * FROM tugas WHERE user_id = $user_id AND status != 'selesai' ORDER BY deadline ASC LIMIT 4");
 
 ?>
@@ -129,8 +129,8 @@ $terdekat = mysqli_query($koneksi, "SELECT * FROM tugas WHERE user_id = $user_id
       }
 
       while ($t = mysqli_fetch_assoc($terdekat)) {
-        // satu baris tugas, dipakai di index.php, tugas.php, dan kalender.php
-// variabel $t harus sudah berisi 1 baris data tugas dari database
+        
+
 
 $kelasBaris = "";
 $label = $t['prioritas'];

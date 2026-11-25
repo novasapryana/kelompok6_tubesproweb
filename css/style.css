@@ -105,7 +105,7 @@
 
     .brand span { color: var(--brand2); }
 
-    /* LOGIN DAN DAFTAR */
+    
 
     .layar-auth {
       min-height: 100vh;
@@ -177,7 +177,7 @@
     html[data-tema="dark"] .pesan { background: #3a1f1d; color: #f0a8a2; }
     html[data-tema="dark"] .pesan.ok { background: #1c3a2b; color: #8fdcb0; }
 
-    /* DASHBOARD */
+    
 
     .app {
       min-height: 100vh;
@@ -286,7 +286,7 @@
       font-weight: 750;
     }
 
-    /* DAFTAR TUGAS */
+    
 
     .list-tugas {
       display: flex;
@@ -373,7 +373,7 @@
     .progress-bar { background: var(--hijau); }
     .btn { border-radius: 11px; }
 
-    /* KALENDER */
+    
 
     .kal-bar {
       display: flex;
@@ -459,12 +459,12 @@
 
     .kal-legenda span { display: inline-flex; align-items: center; gap: 6px; }
 
-    /* PENGATURAN */
+    
 
     .kartu-set { padding: 24px; margin-bottom: 18px; max-width: 750px; }
     .kartu-set h2 { font-size: 18px; font-weight: 750; margin-bottom: 4px; }
 
-    /* RESPONSIVE */
+    
 
     @media (max-width: 900px) {
       .layar-auth { grid-template-columns: 1fr; }
@@ -535,7 +535,7 @@
       .titik { width: 7px; height: 7px; }
     }
 
-/* tambahan karena sekarang pakai link <a>, bukan button */
+
 a.nav-link-custom, a.kal-hari, a.profil-info { text-decoration: none; }
 a.profil-info { display: block; }
 .aksi-tugas a { padding: 6px 10px; font-size: 12px; }

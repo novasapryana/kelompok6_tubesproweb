@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $hariIni = date("Y-m-d");
 
-// bulan yang ditampilkan, format 2026-11 (default bulan ini)
+
 $bulan = date("Y-m");
 if (isset($_GET['bulan'])) {
   $bulan = $_GET['bulan'];
@@ -25,7 +25,7 @@ if ($tahun < 2000 || $tahun > 2100 || $bln < 1 || $bln > 12) {
 
 $bulan = $tahun . "-" . sprintf("%02d", $bln);
 
-// tanggal yang dipilih (default hari ini)
+
 $pilih = $hariIni;
 if (isset($_GET['tanggal'])) {
   $pilih = $_GET['tanggal'];
@@ -35,12 +35,12 @@ $namaBulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli
 $namaHari = array("Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min");
 
 $jumlahHari = date("t", mktime(0, 0, 0, $bln, 1, $tahun));
-$geser = date("N", mktime(0, 0, 0, $bln, 1, $tahun)) - 1;   // Senin = 0
+$geser = date("N", mktime(0, 0, 0, $bln, 1, $tahun)) - 1;   
 
 $bulanLalu = date("Y-m", mktime(0, 0, 0, $bln - 1, 1, $tahun));
 $bulanDepan = date("Y-m", mktime(0, 0, 0, $bln + 1, 1, $tahun));
 
-// ambil semua tugas di bulan ini, dikelompokkan per tanggal deadline
+
 $peta = array();
 $semua = mysqli_query($koneksi, "SELECT * FROM tugas WHERE user_id = $user_id AND deadline LIKE '$bulan%'");
 
@@ -49,7 +49,6 @@ while ($t = mysqli_fetch_assoc($semua)) {
   $peta[$tgl][] = $t;
 }
 
-// tugas pada tanggal yang dipilih
 $pilihDb = mysqli_real_escape_string($koneksi, $pilih);
 $tugasPilih = mysqli_query($koneksi, "SELECT * FROM tugas WHERE user_id = $user_id AND deadline = '$pilihDb' ORDER BY (status = 'selesai') ASC");
 
@@ -112,17 +111,17 @@ $tugasPilih = mysqli_query($koneksi, "SELECT * FROM tugas WHERE user_id = $user_
 
       <div class="kal-grid">
         <?php
-        // nama hari
+        
         for ($h = 0; $h < 7; $h++) {
           echo '<div class="kal-nama-hari">' . $namaHari[$h] . '</div>';
         }
 
-        // kotak kosong sebelum tanggal 1
+       
         for ($k = 0; $k < $geser; $k++) {
           echo '<div class="kal-kosong"></div>';
         }
 
-        // kotak tanggal
+        
         for ($d = 1; $d <= $jumlahHari; $d++) {
           $kunci = $bulan . "-" . sprintf("%02d", $d);
 
@@ -141,7 +140,7 @@ $tugasPilih = mysqli_query($koneksi, "SELECT * FROM tugas WHERE user_id = $user_
             $jumlah = count($peta[$kunci]);
             echo '<span class="kal-penanda">';
 
-            // maksimal 3 titik, sisanya ditulis +angka
+            
             for ($i = 0; $i < $jumlah && $i < 3; $i++) {
               $t = $peta[$kunci][$i];
               $warna = "aktif";
@@ -183,8 +182,7 @@ $tugasPilih = mysqli_query($koneksi, "SELECT * FROM tugas WHERE user_id = $user_
       }
 
       while ($t = mysqli_fetch_assoc($tugasPilih)) {
-        // satu baris tugas, dipakai di index.php, tugas.php, dan kalender.php
-// variabel $t harus sudah berisi 1 baris data tugas dari database
+       
 
 $kelasBaris = "";
 $label = $t['prioritas'];

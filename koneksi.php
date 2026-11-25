@@ -1,5 +1,5 @@
 <?php
-// koneksi ke database MySQL (XAMPP: user root, password kosong)
+
 session_start();
 
 $koneksi = mysqli_connect("localhost", "root", "", "tugasin");

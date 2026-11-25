@@ -10,7 +10,7 @@ $user_id = $_SESSION['user_id'];
 $pesan = "";
 $pesanOk = false;
 
-// proses ubah nama
+
 if (isset($_POST['simpan_nama'])) {
   $nama = trim($_POST['nama']);
 

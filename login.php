@@ -1,7 +1,7 @@
 <?php
 include "koneksi.php";
 
-// kalau sudah login, langsung ke beranda
+
 if (isset($_SESSION['user_id'])) {
   header("Location: index.php");
   exit;
@@ -16,6 +16,8 @@ if (isset($_POST['masuk'])) {
   $hasil = mysqli_query($koneksi, "SELECT * FROM users WHERE email = '$email'");
   $user = mysqli_fetch_assoc($hasil);
 
+  
+
   if ($user && password_verify($password, $user['password'])) {
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['nama'] = $user['nama'];
@@ -25,6 +27,29 @@ if (isset($_POST['masuk'])) {
   } else {
     $pesan = "Email atau kata sandi tidak cocok.";
   }
+}
+
+if (isset($_POST['demo'])) {
+  $emailDemo = "demo@tugasin.test";
+
+  $cek = mysqli_query($koneksi, "SELECT * FROM users WHERE email = '$emailDemo'");
+
+  
+  if (mysqli_num_rows($cek) == 0) {
+    $hash = password_hash("demo1234", PASSWORD_DEFAULT);
+
+    mysqli_query($koneksi, "INSERT INTO users (nama, email, password) VALUES ('Mahasiswa Demo', '$emailDemo', '$hash')");
+
+    $cek = mysqli_query($koneksi, "SELECT * FROM users WHERE email = '$emailDemo'");
+  }
+
+  $user = mysqli_fetch_assoc($cek);
+
+  $_SESSION['user_id'] = $user['id'];
+  $_SESSION['nama'] = $user['nama'];
+  $_SESSION['email'] = $user['email'];
+  header("Location: index.php");
+  exit;
 }
 
 ?>
@@ -81,6 +106,15 @@ if (isset($_POST['masuk'])) {
       <div class="text-center mt-3">
         Belum punya akun? <a href="daftar.php">Daftar di sini</a>
       </div>
+            <hr>
+
+      <form method="post">
+        <button class="btn btn-outline-success w-100" type="submit" name="demo">Masuk akun demo</button>
+      </form>
+
+      <p class="teks-kecil mt-3 mb-0">
+        Akun demo hanya untuk mencoba. Jangan gunakan kata sandi asli.
+      </p>
     </section>
 
   </main>

@@ -1,5 +1,4 @@
 <?php
-// proses hapus tugas dan ubah status selesai/belum
 include "koneksi.php";
 
 if (!isset($_SESSION['user_id'])) {
@@ -29,7 +28,7 @@ if ($do == "toggle") {
   }
 }
 
-// kembali ke halaman sebelumnya
+
 if (isset($_SERVER['HTTP_REFERER'])) {
   header("Location: " . $_SERVER['HTTP_REFERER']);
 } else {

@@ -14,13 +14,13 @@ if (isset($_POST['daftar'])) {
   if (strlen($nama) < 2 || strlen($password) < 6) {
     $pesan = "Nama atau kata sandi terlalu pendek.";
   } else {
-    // cek apakah email sudah dipakai
+    
     $cek = mysqli_query($koneksi, "SELECT id FROM users WHERE email = '$emailDb'");
 
     if (mysqli_num_rows($cek) > 0) {
       $pesan = "Email ini sudah terdaftar.";
     } else {
-      // password disimpan dalam bentuk hash, bukan teks asli
+     
       $hash = password_hash($password, PASSWORD_DEFAULT);
 
       mysqli_query($koneksi, "INSERT INTO users (nama, email, password) VALUES ('$namaDb', '$emailDb', '$hash')");

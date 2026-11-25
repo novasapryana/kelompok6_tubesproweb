@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $pesan = "";
 
-// nilai awal form (untuk tugas baru)
+
 $id = 0;
 $judulTugas = "";
 $matkul = "";
@@ -18,12 +18,11 @@ $prioritas = "Sedang";
 $status = "aktif";
 $catatan = "";
 
-// dari kalender, tanggalnya sudah terisi
 if (isset($_GET['tanggal'])) {
   $deadline = $_GET['tanggal'];
 }
 
-// kalau ada ?id=... berarti mode edit, ambil data lamanya
+
 if (isset($_GET['id'])) {
   $idEdit = (int) $_GET['id'];
   $hasil = mysqli_query($koneksi, "SELECT * FROM tugas WHERE id = $idEdit AND user_id = $user_id");
@@ -40,7 +39,7 @@ if (isset($_GET['id'])) {
   }
 }
 
-// proses simpan
+
 if (isset($_POST['simpan'])) {
   $id = (int) $_POST['id'];
   $judulTugas = trim($_POST['judul']);
