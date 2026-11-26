@@ -1,4 +1,4 @@
-hc<?php
+<?php
 include "koneksi.php";
 
 if (!isset($_SESSION['user_id'])) {
